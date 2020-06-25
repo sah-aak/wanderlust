@@ -19,8 +19,14 @@ const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
 // Add AJAX functions here:
 const getVenues = async () => {
   const city=$input.val();
-  const urlToFetch=`${url}${city}&limit=10&client_id=${clientId}&client_secret=${clientSecret}&v=YYYYMMDD`;
-
+  const today = new Date();
+  const year =today.getFullYear();
+  const ext=((today.getMonth()+1)<10?'0'+(today.getMonth()+1):(today.getMonth()+1));
+  const month=ext;
+  const date=today.getDate();
+  
+  const urlToFetch=`${url}${city}&limit=10&client_id=${clientId}&client_secret=${clientSecret}&v=${(year+month+date)}`;
+ 
 try{
   const response=await fetch(urlToFetch);
   if(response.ok)
